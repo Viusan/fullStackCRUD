@@ -5,6 +5,8 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public class personRepository {
     private final JdbcTemplate jdbcTemplate;//this will handle the connection between database and server
@@ -26,4 +28,8 @@ public class personRepository {
         jdbcTemplate.update(sql, person.getName(), person.getYear(), person.getDescription());
     }
 
+    public List<Person> getAllPeople(){
+        String sql = "SELECT * FROM person";
+        return jdbcTemplate.query(sql, personRowMapper);
+    }
 }

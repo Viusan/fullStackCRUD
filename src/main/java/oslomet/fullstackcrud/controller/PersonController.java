@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import oslomet.fullstackcrud.repository.personRepository;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/Person")
 public class PersonController {
@@ -20,6 +22,11 @@ public class PersonController {
     @PostMapping("/login")
     public void addPerson(@RequestBody Person person){//Without requestBody tells Spring to take the JSON body and convert it into a Java object (Person)
         repository.insertPerson(person);
+    }
+
+    @GetMapping("/getAllUser")
+    public List<Person> getAllPerson(){
+        return repository.getAllPeople();
     }
 }
 
