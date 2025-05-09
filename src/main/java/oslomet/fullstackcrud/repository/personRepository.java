@@ -1,11 +1,9 @@
-package repository;
+package oslomet.fullstackcrud.repository;
 
-import models.Person;
+import oslomet.fullstackcrud.models.Person;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
-
-import java.util.List;
 
 @Repository
 public class personRepository {
@@ -23,8 +21,9 @@ public class personRepository {
                     rs.getString("description")
             );
 
-    public List<Person> getAllPerson(){
-        String sql = "SELECT * FROM person";
-        return jdbcTemplate.query(sql, personRowMapper);
+    public void insertPerson(Person person) {
+        String sql = "INSERT INTO person (name, year, description) VALUES (?, ?, ?)";
+        jdbcTemplate.update(sql, person.getName(), person.getYear(), person.getDescription());
     }
+
 }

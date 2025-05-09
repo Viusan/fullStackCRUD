@@ -1,4 +1,4 @@
-package models;
+package oslomet.fullstackcrud.models;
 
 public class Person {
     private int id;
