@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script defer>
+      let userInfo = {
+        username: $("#name").val(),
+        password: $("#password").val(),
+        description : $("#description").val()
+      }
+      $("#submitButton").on("click", function(event){
+        $.ajax({
+          type: "POST",
+          url: "/api/Person/login",
+          data: JSON.stringify(userInfo),
+          contentType: "application/json",
+          success: function(data){
+            console.log(data);
+          },
+          error: function(xhr, status, error){//if error this displays
+            console.error(xhr.responseText);
+          }
+        });
+      });
+
+    </script>
+</head>
+<body>
+<form>
+  <div>
+    <label for="name">Name:</label><br>
+    <input type="text" id="name" name="password" required><br>
+  </div>
+  <div>
+    <label for="password">password:</label><br>
+    <input type="text" id="password" name="password" required><br>
+  </div>
+  <div>
+    <label for="description">Description:</label><br>
+    <input type="text" id="description" name="description" required><br>
+  </div>
+  <div>
+    <button type="button" id="submitButton">Submit</button>
+  </div>
+</form>
+</body>
+</html>
