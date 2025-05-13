@@ -28,6 +28,16 @@ public class personRepository {
         jdbcTemplate.update(sql, person.getName(), person.getYear(), person.getDescription());
     }
 
+    public void updatePerson(Person person){
+        String sql = "UPDATE person SET name = ?, year = ?, description = ? WHERE id = ?";
+        jdbcTemplate.update(sql, person.getName(), person.getYear(), person.getDescription(), person.getId());
+    }
+
+    public void deletePerson(Person person){
+        String sql = "DELETE FROM person WHERE id = ?";
+        jdbcTemplate.update(sql, person.getId());
+    }
+
     public List<Person> getAllPeople(){
         String sql = "SELECT * FROM person";
         return jdbcTemplate.query(sql, personRowMapper);

@@ -19,11 +19,20 @@ public class PersonController {
         this.repository = repository;
     }
 
-    @PostMapping("/login")
+    @PostMapping("/create")
     public void addPerson(@RequestBody Person person){//Without requestBody tells Spring to take the JSON body and convert it into a Java object (Person)
         repository.insertPerson(person);
     }
 
+    @PutMapping("/update")
+    public void updatePerson(@RequestBody Person person){
+        repository.updatePerson(person);
+    }
+
+    @DeleteMapping("/delete")
+    public void deletePerson(@RequestBody Person person){
+        repository.deletePerson(person);
+    }
     @GetMapping("/getAllUser")
     public List<Person> getAllPerson(){
         return repository.getAllPeople();

@@ -15,7 +15,7 @@
                 }
                 $.ajax({
                     type: "POST",
-                    url: "/api/Person/login",
+                    url: "/api/Person/create",
                     data: JSON.stringify(userInfo),
                     contentType: "application/json",
                     success: function(data){
@@ -25,7 +25,47 @@
                         console.error(xhr.responseText);
                     }
                 });
+                $("#submitForm")[0].reset();
             });
+
+            $("#updateButton").on("click", function(event){
+                updateInfo = {
+                    id: $("#updateId").val(),
+                    name: $("#updateName").val(),
+                    year: $("#updateYear").val(),
+                    description: $("#updateDescription").val()
+                };
+                $.ajax({
+                   type: "PUT",
+                   url: "/api/Person/update",
+                   data: JSON.stringify(updateInfo),
+                   contentType: "application/json",
+                   success: function(data){
+                       console.log(data);
+                   },
+                   error: function(xhr, status, error){//if error this displays
+                       console.error(xhr.responseText);
+                   }
+                });
+            })
+
+            $("#deleteButton").on("click", function(event){
+                deleteInfo = {
+                    id: $("#deleteId").val()
+                };
+                $.ajax({
+                    type: "DELETE",
+                    url: "/api/Person/delete",
+                    data: JSON.stringify(deleteInfo),
+                    contentType: "application/json",
+                    success: function(data){
+                        console.log(data);
+                    },
+                    error: function(xhr, status, error){//if error this displays
+                        console.error(xhr.responseText);
+                    }
+                });
+            })
 
             $("#getButton").on("click", function(event){
                 $.get("/api/Person/getAllUser",function(data){
@@ -51,14 +91,10 @@
     </script>
 </head>
 <body>
-<form>
+<form id="submitForm">
   <div>
     <label for="name">Name:</label><br>
     <input type="text" id="name" name="name" required><br>
-  </div>
-  <div>
-    <label for="password">password:</label><br>
-    <input type="text" id="password" name="password" required><br>
   </div>
     <div>
         <label for="year">Year:</label><br>
@@ -71,6 +107,38 @@
   <div>
     <button type="button" id="submitButton">Submit</button>
   </div>
+</form>
+<form id="updateForm">
+    <h2>Update users</h2>
+    <div>
+        <label for="updateId">ID:</label><br>
+        <input type="text" id="updateId" name="updateId" required><br>
+    </div>
+    <div>
+        <label for="updateName">Update Name:</label><br>
+        <input type="text" id="updateName" name="updateName" required><br>
+    </div>
+    <div>
+        <label for="updateYear">updateYear:</label><br>
+        <input type="text" id="updateYear" name="updateYear" required><br>
+    </div>
+    <div>
+        <label for="updateDescription">updateDescription:</label><br>
+        <input type="text" id="updateDescription" name="updateDescription" required><br>
+    </div>
+    <div>
+        <button type="button" id="updateButton">Update</button>
+    </div>
+</form>
+<form id="deleteForm">
+    <h2>Delete users</h2>
+    <div>
+        <label for="deleteId">ID:</label><br>
+        <input type="text" id="deleteId" name="deleteId" required><br>
+    </div>
+    <div>
+        <button type="button" id="deleteButton">Delete</button>
+    </div>
 </form>
 <div class="container mt-5"><!--mt = margin top-->
     <h2 class="mb-4">Person List</h2><!--mb = margin bottom-->
