@@ -21,7 +21,7 @@ public class PersonController {
 
     @PostMapping("/create")
     public void addPerson(@RequestBody Person person){//Without requestBody tells Spring to take the JSON body and convert it into a Java object (Person)
-        repository.insertPerson(person);
+        repository.insertPerson(person);//Takes person and inserts it into the function inside personRepository
     }
 
     @PutMapping("/update")

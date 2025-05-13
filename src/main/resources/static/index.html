@@ -8,15 +8,15 @@
     <script defer>
         $(document).ready(function(){
             $("#submitButton").on("click", function(event){
-                let userInfo = {
+                let userInfo = {//Object with input values that get sent to db
                     name: $("#name").val(),
                     year: $("#year").val(),
                     description: $("#description").val()
                 }
-                $.ajax({
+                $.ajax({//Ajax with POST method
                     type: "POST",
                     url: "/api/Person/create",
-                    data: JSON.stringify(userInfo),
+                    data: JSON.stringify(userInfo),//converts objects and arrays into JSON string (when sending data to server is has to be string)
                     contentType: "application/json",
                     success: function(data){
                         console.log(data);
@@ -25,7 +25,7 @@
                         console.error(xhr.responseText);
                     }
                 });
-                $("#submitForm")[0].reset();
+                $("#submitForm")[0].reset();//Resets input fields
             });
 
             $("#updateButton").on("click", function(event){
